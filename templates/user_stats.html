@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Статистика по пользователям{% endblock %}
+
+{% block content %}
+<h1>Статистика по пользователям</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Пользователь</th>
+            <th scope="col">Количество посещений</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stat in user_stats %}
+        <tr>
+            <td>{{ stat.user_name or 'Аноним' }}</td>
+            <td>{{ stat.visit_count }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('reports.export_user_stats') }}" class="btn btn-primary">Экспорт в CSV</a>
+{% endblock %}
